@@ -1,0 +1,110 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<Feetup.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+    
+}
+
+
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="~/images/x.jpg" alt="First slide">
+
+            <div class="carousel-caption">
+
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="~/images/y.jpg" alt="Second slide">
+            <div class="carousel-caption">
+
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="~/images/z.jpg" alt="Third slide">
+            <div class="carousel-caption">
+
+
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+</div>
+
+@*<div class="olContent f1"><h2 style="color:black">Search Product/Category</h2></div>
+    <div class="olSearch fr">
+        <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control" />
+        <div class="searchIcon">
+            <button type="button" class="searchBtn">
+                <img src="~/images/SearchIcon.png" />
+            </button>
+        </div>
+
+
+    </div>*@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Trending Products</h2>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        @{int x = 0;}
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                x++;
+                <div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
+
+                    <img class="img img-responsive cimg" src="@Url.Content(item.ProductImage)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+                    <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.ProductName, "../Customers/Viewitem", new { id = @item.ProductID })</h4>
+
+                </div>
+
+            }
+        }
+
+        @*<h4>@x Results found</h4>*@
+    </div>
+
+
+
+
+
+<div id="container" style="margin-left: 20px; margin-top:10px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("HomePage", new { page }))
+    </div>
+</div>
+
+
+
+

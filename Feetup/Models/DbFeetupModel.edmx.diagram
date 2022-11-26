@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a098685755454059ad95ca16f988d5ef" Name="Diagram1">
+        <EntityTypeShape EntityType="DBfeetModel.Admin" Width="1.5" PointX="7.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Cart" Width="1.5" PointX="0.875" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Category" Width="1.5" PointX="7.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Customer" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Ordered" Width="1.5" PointX="4.625" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Product" Width="1.5" PointX="7.375" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBfeetModel.Seller" Width="1.5" PointX="7.25" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="DBfeetModel.FK__Category__AdminI__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Cart__CustomerID__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Cart__OrderID__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Product__Categor__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Ordered__Custome__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Product__Custome__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="DBfeetModel.FK__Product__SellerI__2F10007B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

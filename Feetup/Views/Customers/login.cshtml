@@ -1,0 +1,47 @@
+﻿@model Feetup.Models.Customer
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/_LayoutPageCustomer.cshtml";
+}
+
+
+    <!-- contact-form -->
+    <div class="message warning">
+        <div class="inset">
+            <div class="login-head">
+                <h1>Customer Login</h1>
+                <div class="alert-close"> </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                <li>
+                    @Html.EditorFor(x => x.CustomerName,new { htmlAttributes = new { @placeholder = "Username" } })<a href="#" class=" icon user"></a>
+
+                    <span style="color:red">
+                        @Html.ValidationMessageFor(x => x.CustomerName)
+                    </span>
+                </li>
+                <div class="clear"> </div>
+                <li>
+                    @Html.PasswordFor(x => x.CustomerPassword, new { @placeholder = "Password" }) <a href="#" class="icon lock"></a>
+                    <span style="color:red">
+                        @Html.ValidationMessageFor(x => x.CustomerPassword)
+                    </span>
+                </li>
+                <div class="clear"> </div>
+                <div class="submit">
+                    <input type="submit" value="Login">
+                    <h4><a href="Registration">Dont have Account ?</a></h4>
+                    <div class="clear">  </div>
+                </div>
+            }
+
+
+                <p>@ViewBag.error</p>
+            </div>
+    </div>
+
+    <div class="clear">
+
+    </div>
+

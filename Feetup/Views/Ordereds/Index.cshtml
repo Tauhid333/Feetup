@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Feetup.Models.Ordered>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Order Details</h2>
+<p>
+    @Html.ActionLink("Back to Admin Panel", "../Admins/AdminLogin")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CustomerPhone)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderID)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Customer.CustomerPhone)
+    </td>
+    <td>
+        @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+    </td>
+  
+
+</tr>
+}
+
+</table>

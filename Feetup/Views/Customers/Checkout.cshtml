@@ -1,0 +1,104 @@
+﻿<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnalert").click(function () {
+            swal("Order confirmed ");
+
+        });
+    });
+</script>
+
+@if (Session["total"] == null)
+{
+    <h1>Cart is empty</h1>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                <div class="cart-list">
+                    <h3>@Session["item_count"]</h3>
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                @*<th>            </th>*@
+                                <th>Product ID  </th>
+                                <th>Product name</th>
+                                <th>Price       </th>
+                                <th>Quantity    </th>
+                                <th>Total       </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Session["cart"] as List<Feetup.Models.ShoppingCartModel>)
+                            {
+
+
+                                <tr class="text-center" style="margin-right:20px">
+
+
+                                    @*<td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>*@
+                                    <td class="product-name">
+                                        <h5>@item.ProductID</h5>
+
+                                    </td>
+
+                                    <td class="product-name">
+                                        <h5>@item.ProductName</h5>
+
+                                    </td>
+
+                                    <td class="price">@item.ProductPrice</td>
+
+                                    <td class="quantity">
+                                        @item.Quantity
+                                    </td>
+
+                                    <td class="total">TK @item.TotalPrice</td>
+                                    <td class="product-remove"><a href="@Url.Action("remove", "Customers", new{id = item.ProductID} )">Remove</a></td>
+                                </tr><!-- END TR-->
+                            }
+
+                            <!-- END TR-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+
+
+            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>TK @Session["total"]</span>
+                    </p>
+                </div>
+                @*@if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("login","Customers")" class="btn btn-primary py-3 px-4"></a>
+                        <a href="@Url.Action("Registration","Customers")" class="btn btn-primary py-3 px-4"></a>
+                    }*@
+                @*@if (User.Identity.IsAuthenticated)
+                    {*@
+                @using (Html.BeginForm())
+                {
+
+                    <input type="text" name="CustomerPhn" class="form-control col-lg-6" placeholder="Phone Number" />
+                    <textarea name="address" class="form-control col-lg-6" placeholder="Address"></textarea>
+                    <input type="submit" value="Checkout" class="btn btn-primary py-3 px-4" id="btnalert" />
+                }
+
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,73 @@
+﻿@model Feetup.Models.Admin
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #login-div {
+        position: absolute;
+        top: 160px;
+        left: 40%;
+        right: 40%;
+        width: 400px;
+        height: 160px;
+        border: 1px solid #ccc;
+        padding: 25px 25px;
+        
+    }
+</style>
+
+<div id="login-div">
+    @using (Html.BeginForm("Authorize","Admins" ,FormMethod.Post))
+    {
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.AdminName)
+
+            </td>
+            <td>
+                @Html.EditorFor(model => model.AdminName)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> @Html.ValidationMessageFor(model => model.AdminName)</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.AdminPassword)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.AdminPassword)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> @Html.ValidationMessageFor(model => model.AdminPassword)</td>
+        </tr>
+        <tr>
+            
+            <td colspan="2">
+                <label class="field-validation-error">@Html.DisplayFor(model=>model.LoginErrorMessage)</label>
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name="name" value="Login" />
+                <input type="reset" name="name" value="Clear" />
+
+            </td>
+        </tr>
+    </table>
+    }
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

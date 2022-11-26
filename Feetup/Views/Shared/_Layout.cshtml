@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <style>
+        .ht {
+            border-radius: initial;
+        }
+    </style>
+    @*@Styles.Render("~/Content/css")*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/styles/MyMainLayOut.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <h1><a href="#">FEETUP</a></h1>
+                    <p>All IN ONE</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="account">
+                    <ul>
+                        <li>
+                            <div class="hidden-xs">
+                                <h4><a>Call</a></h4>
+                                <p>01752296378</p>
+                            </div>
+
+                            <div class="visible-xs">
+
+                                <p>01752296378</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="nav-menus">
+
+                    <ul class="nav nav-pills">
+                        <li>
+                            @Html.ActionLink("Home", "HomePage", "Home", null, new { @class = "ht" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Categories", "ViewCat", "Customers", null, new { @class = "ht" })
+
+                        </li>
+                        
+                        <li>
+                            @Html.ActionLink("Sell On FeetUp", "Index", "Home", null, new { @class = "ht" })
+                        </li>
+
+                      
+                        <li>
+                            @Html.ActionLink("About", "About", "Home", null, new { @class = "ht" })
+                        </li>
+                       
+
+                        <li>
+
+
+                            @if (Session["ad_id"] == null)
+                            {
+                                @Html.ActionLink("SignUp/LogIn", "Index", "Home", null, new { @class = "ht" })
+                            }
+
+                            else
+                            {
+                                @Html.ActionLink("LogOut", "LogOut", "Customers", null, new { @class = "ht" })
+                            }
+
+
+
+                        </li>
+
+                        <li class="nav-item cta cta-colored"><a href="@Url.Action("Checkout","Customers")" class="nav-link"><span class="fa fa-shopping-cart"></span>Cart</a></li>
+                    </ul>
+                    @*@Html.Partial("_ShoppingCart")*@
+
+
+                </div>
+                
+            </div>
+
+        </div>
+
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-md-12 copyright">
+
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>&copy; @DateTime.Now.Year - FeetUp. All right reserved.</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 copyright-right">
+
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                        </ul>
+                    </div>
+                    <address>
+                       FEETUP<br />
+                        MohammadPur,Dhaka<br />
+                        <abbr title="Phone">P:</abbr>
+                        01777079065
+                    </address>
+
+                    <address>
+                        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                    </address>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

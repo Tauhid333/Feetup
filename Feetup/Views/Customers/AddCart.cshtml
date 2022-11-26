@@ -1,0 +1,87 @@
+﻿@model Feetup.Models.Product
+@{
+    ViewBag.Title = "Addcart";
+}
+@*<script type="text/javascript">
+
+
+    function AddToCart(Model) {
+        var productid = $(Model).attr("productID");
+        
+        var formData = new FormData();
+        formData.append("ProductID", productid);
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Customers/AddCart',
+            success: function (data) {
+                if (data.Success) {
+                    $("#cartItem").text("Cart(" + data.Counter + ")");
+                }
+
+            },
+            error: function () {
+                alert("There is a problem");
+
+            }
+        }
+        );
+
+    }
+</script>*@
+<br />
+<br />
+<br />
+
+
+
+
+@using (@Html.BeginForm())
+{
+
+
+
+    <div class="container">
+
+
+        <div class="row">
+
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                <img style="min-height:200px; width:200px;" src="@Url.Content(Model.ProductImage)" />
+
+
+            </div>
+
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                <h1>Product Name: @Model.ProductName</h1>
+                <h2>Price: @Model.ProductPrice TAKA</h2>
+                <h6>Description: @Model.ProductDescription</h6>
+
+                <input type="number" name="qty" value="0" id="qty" />
+
+                <input type="submit" value="Add" class="btn btn-default" />
+
+            </div>
+
+
+
+        </div>
+
+        
+
+
+    </div>
+}
+
+
+
+

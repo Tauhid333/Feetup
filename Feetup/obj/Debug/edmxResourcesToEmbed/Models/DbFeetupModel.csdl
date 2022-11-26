@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBfeetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Category__AdminI__267ABA7A" FromRole="Admin" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Cart__CustomerID__35BCFE0A" FromRole="Cart" ToRole="Customer" />
+    <NavigationProperty Name="Ordered" Relationship="Self.FK__Cart__OrderID__34C8D9D1" FromRole="Cart" ToRole="Ordered" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminID" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK__Category__AdminI__267ABA7A" FromRole="Category" ToRole="Admin" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__Categor__2E1BDC42" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__CustomerID__35BCFE0A" FromRole="Customer" ToRole="Cart" />
+    <NavigationProperty Name="Ordered" Relationship="Self.FK__Ordered__Custome__31EC6D26" FromRole="Customer" ToRole="Ordered" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__Custome__2D27B809" FromRole="Customer" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Ordered">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="CustomerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__OrderID__34C8D9D1" FromRole="Ordered" ToRole="Cart" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Ordered__Custome__31EC6D26" FromRole="Ordered" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="ProductPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="SellerID" Type="Int32" />
+    <Property Name="ProductColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__2E1BDC42" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Product__Custome__2D27B809" FromRole="Product" ToRole="Customer" />
+    <NavigationProperty Name="Seller" Relationship="Self.FK__Product__SellerI__2F10007B" FromRole="Product" ToRole="Seller" />
+  </EntityType>
+  <EntityType Name="Seller">
+    <Key>
+      <PropertyRef Name="SellerID" />
+    </Key>
+    <Property Name="SellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SellerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SellerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SellerPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="SellerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__SellerI__2F10007B" FromRole="Seller" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK__Category__AdminI__267ABA7A">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__CustomerID__35BCFE0A">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__OrderID__34C8D9D1">
+    <End Role="Ordered" Type="Self.Ordered" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordered">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Categor__2E1BDC42">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ordered__Custome__31EC6D26">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Ordered">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Custome__2D27B809">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__SellerI__2F10007B">
+    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="SellerID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBfeetEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="Ordered" EntityType="Self.Ordered" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="Seller" EntityType="Self.Seller" />
+    <AssociationSet Name="FK__Category__AdminI__267ABA7A" Association="Self.FK__Category__AdminI__267ABA7A">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Category" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__CustomerID__35BCFE0A" Association="Self.FK__Cart__CustomerID__35BCFE0A">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__OrderID__34C8D9D1" Association="Self.FK__Cart__OrderID__34C8D9D1">
+      <End Role="Ordered" EntitySet="Ordered" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Categor__2E1BDC42" Association="Self.FK__Product__Categor__2E1BDC42">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ordered__Custome__31EC6D26" Association="Self.FK__Ordered__Custome__31EC6D26">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Ordered" EntitySet="Ordered" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Custome__2D27B809" Association="Self.FK__Product__Custome__2D27B809">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__SellerI__2F10007B" Association="Self.FK__Product__SellerI__2F10007B">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
